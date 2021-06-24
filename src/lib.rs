@@ -7,7 +7,8 @@ fn str_to_bin(s: &str) -> String {
     s.as_bytes()
         .iter()
         .map(|b| format!("{:08b}", b))
-        .collect::<Vec<_>>().concat()
+        .collect::<Vec<_>>()
+        .concat()
 }
 
 fn bin_to_zw(s: &str) -> String {
@@ -16,7 +17,6 @@ fn bin_to_zw(s: &str) -> String {
             '0' => Some(A),
             '1' => Some(B),
             _ => None,
-            // _ => ' ',
         })
         .collect::<Vec<_>>();
 
@@ -38,7 +38,9 @@ fn bin_to_str(s: &str) -> String {
         })
         .collect();
 
-    std::str::from_utf8(&out).unwrap().to_owned()
+    std::str::from_utf8(&out)
+        .unwrap()
+        .to_owned()
 }
 
 fn zw_to_bin(s: &str) -> String {
