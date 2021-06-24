@@ -1,9 +1,5 @@
 use std::iter::FromIterator;
 
-fn main() {
-    println!("Hello, world!");
-}
-
 const A: char = '\u{200c}';
 const B: char = '\u{200b}';
 
