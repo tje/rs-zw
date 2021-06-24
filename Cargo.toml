@@ -7,6 +7,14 @@ edition = "2018"
 name = "zw"
 path = "src/lib.rs"
 
+[[bin]]
+name = "str2zw"
+path = "src/bin/str2zw.rs"
+
+[[bin]]
+name = "zw2str"
+path = "src/bin/zw2str.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
