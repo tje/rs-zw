@@ -1,7 +1,7 @@
 use std::iter::FromIterator;
 
-const ZW_0: char = '\u{200c}';
-const ZW_1: char = '\u{200b}';
+pub const ZW_0: char = '\u{200c}';
+pub const ZW_1: char = '\u{200b}';
 
 fn str_to_bin(s: &str) -> String {
     s.as_bytes()
@@ -79,5 +79,32 @@ mod tests {
         let enc = encode(s);
         let dec = decode(&enc);
         assert_eq!(dec, s);
+    }
+
+    #[test]
+    fn encode_empty() {
+        assert_eq!(encode(""), "");
+    }
+
+    #[test]
+    fn decode_empty() {
+        assert_eq!(decode(""), "");
+    }
+
+    #[test]
+    fn decode_invalid() {
+        assert_eq!(decode("asdf"), "");
+    }
+
+    #[test]
+    fn double_cycle() {
+        let enc = encode("Test");
+        let enc2 = encode(&enc);
+        let dec2 = decode(&enc2);
+        let dec = decode(&dec2);
+
+        assert_eq!(dec, "Test");
+        assert_ne!(enc, enc2);
+        assert_eq!(enc, dec2);
     }
 }
