@@ -1,7 +1,7 @@
 use std::iter::FromIterator;
 
-const A: char = '\u{200c}';
-const B: char = '\u{200b}';
+const ZW_0: char = '\u{200c}';
+const ZW_1: char = '\u{200b}';
 
 fn str_to_bin(s: &str) -> String {
     s.as_bytes()
@@ -14,8 +14,8 @@ fn str_to_bin(s: &str) -> String {
 fn bin_to_zw(s: &str) -> String {
     let chars = s.chars()
         .filter_map(|c| match c {
-            '0' => Some(A),
-            '1' => Some(B),
+            '0' => Some(ZW_0),
+            '1' => Some(ZW_1),
             _ => None,
         })
         .collect::<Vec<_>>();
@@ -46,8 +46,8 @@ fn bin_to_str(s: &str) -> String {
 fn zw_to_bin(s: &str) -> String {
     let chars = s.chars()
         .filter_map(|c| match c {
-            A => Some('0'),
-            B => Some('1'),
+            ZW_0 => Some('0'),
+            ZW_1 => Some('1'),
             _ => None,
         })
         .collect::<Vec<_>>();
