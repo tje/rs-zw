@@ -8,14 +8,6 @@ name = "zw"
 path = "src/lib.rs"
 
 [[bin]]
-name = "str2zw"
-path = "src/bin/str2zw.rs"
-
-[[bin]]
-name = "zw2str"
-path = "src/bin/zw2str.rs"
-
-[[bin]]
 name= "zw"
 path = "src/bin/auto.rs"
 
