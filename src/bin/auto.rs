@@ -1,7 +1,5 @@
 use structopt::StructOpt;
 use std::io::{self, Read};
-use zw;
-use atty;
 
 #[derive(StructOpt, Debug)]
 struct Cli {
