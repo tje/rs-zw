@@ -1,6 +1,29 @@
+//! # ZW
+//!
+//! Utility for encoding and decoding text using zero-width characters.
+//!
+//! ## How it works
+//!
+//! Subject text is first converted to its binary representation (e.g. "foo" ->
+//! "011001100110111101101111"), then each digit is replaced with a zero-width
+//! character (specifically: `U+200B` and `U+200C`). Decoding is simply the
+//! inverse of the same flow of operations.
+//!
+//! ## Example usage
+//!
+//! ```
+//! use zw;
+//! let encoded = zw::encode("Hello");
+//! let decoded = zw::decode(&encoded);
+//! assert_ne!("Hello", &encoded);
+//! assert_eq!("Hello", &decoded);
+//! ```
+
 use std::iter::FromIterator;
 
+/// Zero-width character to exchange with "0"
 pub const ZW_0: char = '\u{200c}';
+/// Zero-width character to exchange with "1"
 pub const ZW_1: char = '\u{200b}';
 
 fn str_to_bin(s: &str) -> String {
@@ -23,6 +46,15 @@ fn bin_to_zw(s: &str) -> String {
     String::from_iter(chars)
 }
 
+/// Encodes a string, returning a new one containing only zero-width characters
+/// # Example
+/// ```
+/// let encoded = zw::encode("x");
+/// assert_eq!(
+///     &encoded,
+///     "\u{200c}\u{200b}\u{200b}\u{200b}\u{200b}\u{200c}\u{200c}\u{200c}",
+/// );
+/// ```
 pub fn encode<S: AsRef<str>>(s: S) -> String {
     let bin = str_to_bin(s.as_ref());
     bin_to_zw(&bin)
@@ -54,6 +86,14 @@ fn zw_to_bin(s: &str) -> String {
     String::from_iter(chars)
 }
 
+/// Decodes a zero-width character encoded string, returning a new one
+/// # Example
+/// ```
+/// let decoded = zw::decode(
+///     "\u{200c}\u{200b}\u{200b}\u{200b}\u{200b}\u{200c}\u{200c}\u{200c}"
+/// );
+/// assert_eq!(&decoded, "x");
+/// ```
 pub fn decode<S: AsRef<str>>(s: S) -> String {
     let bin = zw_to_bin(s.as_ref());
     bin_to_str(&bin)
