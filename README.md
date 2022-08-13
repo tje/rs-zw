@@ -10,7 +10,7 @@ Subject text is first converted to its binary representation (e.g. "foo" -> "011
 
 As a module:
 
-```rs
+```rust
 use zw;
 // ...
 let encoded = zw::encode("Hello");
