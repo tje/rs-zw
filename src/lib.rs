@@ -23,8 +23,8 @@ fn bin_to_zw(s: &str) -> String {
     String::from_iter(chars)
 }
 
-pub fn encode(s: &str) -> String {
-    let bin = str_to_bin(s);
+pub fn encode<S: AsRef<str>>(s: S) -> String {
+    let bin = str_to_bin(s.as_ref());
     bin_to_zw(&bin)
 }
 
@@ -54,8 +54,8 @@ fn zw_to_bin(s: &str) -> String {
     String::from_iter(chars)
 }
 
-pub fn decode(s: &str) -> String {
-    let bin = zw_to_bin(s);
+pub fn decode<S: AsRef<str>>(s: S) -> String {
+    let bin = zw_to_bin(s.as_ref());
     bin_to_str(&bin)
 }
 
