@@ -27,16 +27,16 @@ pub fn main() -> io::Result<()> {
 
     let input = input.trim();
     if args.encode {
-        println!("{}", zw::encode(input));
+        print!("{}", zw::encode(input));
     } else if args.decode {
-        println!("{}", zw::decode(input));
+        print!("{}", zw::decode(input));
     } else {
         let ch = input.chars().next().unwrap();
         let out = match ch {
             zw::ZW_0 | zw::ZW_1 => zw::decode(input),
             _ => zw::encode(input),
         };
-        println!("{}", out);
+        print!("{}", out);
     }
 
     Ok(())
